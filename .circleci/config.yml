@@ -16,8 +16,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install Dependendencies
-        command: yarn install --immutable
+          name: Install Dependendencies
+          command: yarn install --immutable
       - run:
           name: build
           command: |
