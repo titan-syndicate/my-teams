@@ -15,6 +15,7 @@
   "scripts": {
     "build": "yarn tsc && docker build . -t titan-syndicate/my-teams",
     "start": "docker run -p 49160:3000 --rm -d --name app titan-syndicate/my-teams",
-    "stop": "docker stop app"
+    "stop": "docker stop app",
+    "auth-kube": "echo $LINODE_KUBECONFIG > ~/kubeconfig && export KUBECONFIG=~/kubeconfig"
   }
 }
