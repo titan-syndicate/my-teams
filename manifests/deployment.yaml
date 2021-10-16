@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-teams-deployment
+  labels:
+    app: my teams
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-teams
+  template:
+    metadata:
+      labels:
+        app: my-teams
+    spec:
+      containers:
+      - name: my-teams
+        image: rianfowler/my-teams:0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
