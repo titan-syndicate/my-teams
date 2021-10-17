@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-teams-deployment
   labels:
-    app: my teams
+    app: my-teams
 spec:
   replicas: 3
   selector:

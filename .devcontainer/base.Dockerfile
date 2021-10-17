@@ -27,7 +27,7 @@ ENV SHELL=/bin/bash \
     PIPX_HOME="/usr/local/py-utils" \
     PIPX_BIN_DIR="/usr/local/py-utils/bin" \
     RVM_PATH="/usr/local/rvm" \
-    RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev" \ 
+    RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev" \
     GOROOT="/usr/local/go" \
     GOPATH="/go" \
     CARGO_HOME="/usr/local/cargo" \
@@ -41,7 +41,7 @@ ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${ORIGINAL_PATH}:${DOTNET_ROO
 COPY library-scripts/* setup-user.sh first-run-notice.txt /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Restore man command
-    && yes | unminimize 2>&1 \ 
+    && yes | unminimize 2>&1 \
     # Run common script and setup user
     && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" "true" "true" \
     && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${PATH}" \
@@ -108,7 +108,10 @@ RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAM
     && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
-# Mount for docker-in-docker 
+# Install linode-cli
+RUN bash /tmp/scripts/linode.sh
+
+# Mount for docker-in-docker
 VOLUME [ "/var/lib/docker" ]
 
 # Fire Docker/Moby script if needed along with Oryx's benv
